@@ -53,7 +53,7 @@ const insert = async (todo, cb) => {
   }
 };
 
-const getAll = async (cb) => {
+const findAll = async (cb) => {
   const pool = oracledb.getPool();
   try {
     const conn = await pool.getConnection();
@@ -66,9 +66,24 @@ const getAll = async (cb) => {
   }
 };
 
+const findOneById = async (id, cb) => {
+  const pool = oracledb.getPool();
+  try {
+    const conn = await pool.getConnection();
+    const sql = `select * from Todo where id=${id}`;
+    const res = await conn.execute(sql);
+    console.log(res);
+    cb(null, res.rows[0]);
+
+  } catch (err) {
+    cb(err);
+  }
+};
+
 export default {
   createSequence,
   createTable,
   insert,
-  getAll
+  findAll,
+  findOneById
 };

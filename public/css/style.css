@@ -6,8 +6,8 @@ body {
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
-	font-size: 18px;
-	font-family: 'PT Sans Narrow', sans-serif;
+	font-size: 16px;
+	font-family: 'Nunito', sans-serif;
 }
 
 a {
@@ -19,7 +19,7 @@ input {
 	padding: 6px 8px;
 	border: 1px solid #0812b3;
 	outline: none;
-	font-family: 'PT Sans Narrow', sans-serif !important;
+	font-family: 'Nunito', sans-serif !important;
 	font-size: 0.8em !important;
 }
 
@@ -31,12 +31,17 @@ button {
 	border: none;
 	outline: none;
 	cursor: pointer;
-	font-family: 'PT Sans Narrow', sans-serif !important;
+	font-family: 'Nunito', sans-serif !important;
 	font-size: 0.9em !important;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
 .sha-wrapper {
-	padding: 15px 25px;
+	padding: 15px 20px;
 }
 
 .sha-col {
@@ -50,7 +55,7 @@ button {
 }
 
 .sha-list > li {
-	margin: 5px 2px;
+	margin: 8px 2px;
 }
 
 .sha-form {
@@ -59,12 +64,45 @@ button {
 	border: dashed #3a579b 1px;
 	padding-top: 15px;
 	padding-bottom: 15px;
+	width: 100%;
 }
 
 .sha-form > input {
-	margin: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.sha-form > input.full {
+	width: 80%;
+}
+
+.sha-form > input.small {
+	width: 50%;
+	margin-right: 5px;
 }
 
 .sha-form > button {
 	margin-top: 10px;
+}
+
+.sha-form > pre {
+	font-size: 0.7em;
+}
+
+@media screen and (max-width: 992px) {
+	.sha-col {
+		width: 33%
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.sha-col {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.sha-col {
+		width: 100%;
+	}
 }

@@ -9,7 +9,7 @@
   <title>NodeJS - Oracle SQL</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,900" rel="stylesheet">
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -26,26 +26,41 @@
         <li>
           <a href="/api/todo/create-table">Create Table</a>
         </li>
-        <li>
-          <a href="/api/todo/">Get all</a>
-        </li>
+
         <li>
           Insert
           <form action="/api/todo" method="post" class="sha-form">
-            <input type="text" name="title" placeholder="Title">
+            <input type="text" name="title" placeholder="Title" class="full">
             <br>
-            <input type="text" name="content" placeholder="Content">
+            <input type="text" name="content" placeholder="Content" class="full">
             <br>
-            <input type="date" name="date_start">
+            <input type="date" name="date_start" class="full">
             <br>
-            <input type="date" name="date_end">
+            <input type="date" name="date_end" class="full">
             <br>
             <button type="submit">Submit</button>
+          </form>
+        </li>
+
+        <li>
+          <a href="/api/todo/">Find All</a>
+        </li>
+
+        <li>
+          Find One By Id
+          <form class="sha-form">
+            <input type="number" id="id-todo" placeholder="Id" class="small">
+            <button type="button" id="btn-find-one-todo">Find</button>
           </form>
         </li>
       </ul>
     </div>
   </div>
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Scripts -->
+  <script src="/js/script.js"></script>
 </body>
 
 </html>
