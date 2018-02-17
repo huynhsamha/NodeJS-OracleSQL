@@ -1,5 +1,5 @@
 import oracledb from 'oracledb';
-import dbconfig from '../config/db';
+import dbconfig from '../../config/db';
 
 /**
  * Config global oracledb
@@ -7,22 +7,21 @@ import dbconfig from '../config/db';
 oracledb.outFormat = oracledb.OBJECT;
 oracledb.autoCommit = true;
 
-function CreatePool(poolAlias) {
+function CreatePool() {
   return oracledb.createPool({
     user: dbconfig.user,
     password: dbconfig.password,
     connectString: dbconfig.connectString,
     poolMin: 5,
-    poolMax: 44,
-    poolAlias
+    poolMax: 44
   });
 }
 
-function ClosePool(poolAlias) {
-  return oracledb.getPool(poolAlias).close();
+function ClosePool() {
+  return oracledb.getPool().close();
 }
 
 export default {
   CreatePool,
   ClosePool
-}
+};
