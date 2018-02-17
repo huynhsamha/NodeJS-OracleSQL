@@ -44,7 +44,6 @@ const insert = async (todo, cb) => {
         )`;
 
     const params = [todo.title, todo.content, todo.date_start, todo.date_end];
-
     const res = await conn.execute(sql, params);
     console.log(res);
     cb();
@@ -54,8 +53,22 @@ const insert = async (todo, cb) => {
   }
 };
 
+const getAll = async (cb) => {
+  const pool = oracledb.getPool();
+  try {
+    const conn = await pool.getConnection();
+    const res = await conn.execute('select * from Todo');
+    console.log(res);
+    cb(null, res.rows);
+
+  } catch (err) {
+    cb(err);
+  }
+};
+
 export default {
   createSequence,
   createTable,
-  insert
+  insert,
+  getAll
 };

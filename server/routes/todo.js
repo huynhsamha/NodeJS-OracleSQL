@@ -21,13 +21,17 @@ router.get('/create-table', (req, res, next) => {
 
 
 router.get('/', (req, res, next) => {
+  TodoCtrl.getAll((err, data) => {
+    if (err) { console.log(err); return res.send(err); }
+    res.send(data);
+  });
 });
 
 router.post('/', (req, res, next) => {
   const todo = req.body;
   console.log(todo);
   TodoCtrl.insert(todo, (err) => {
-    if (err) { console.log(err); res.send(err); }
+    if (err) { console.log(err); return res.send(err); }
     res.send('Created OK');
   });
 });
