@@ -5,16 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>NodeJS - Oracle SQL</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <div style="padding: 25px">
-    <div>
-      <h3>Todo APIs</h3>
-      <ul>
-        <li><a href="/todo/create-sequence">Create Sequence</a></li>
-        <li><a href="/todo/create-table">Create Table</a></li>
+  <div class="sha-wrapper">
+    <h2 class="sha-title">APIs List</h2>
+    <div class="sha-col">
+      <h3>Todo APIs List</h3>
+      <ul class="sha-list">
+        <li>
+          <a href="/api/todo/create-sequence">Create Sequence</a>
+        </li>
+        <li>
+          <a href="/api/todo/create-table">Create Table</a>
+        </li>
+        <li>
+          <a href="/api/todo/">Get all</a>
+        </li>
+        <li>
+          Insert
+          <form action="/api/todo" method="post" class="sha-form">
+            <input type="text" name="title" placeholder="Title">
+            <br>
+            <input type="text" name="content" placeholder="Content">
+            <br>
+            <input type="date" name="date_start">
+            <br>
+            <input type="date" name="date_end">
+            <br>
+            <button type="submit">Submit</button>
+          </form>
+        </li>
       </ul>
     </div>
   </div>

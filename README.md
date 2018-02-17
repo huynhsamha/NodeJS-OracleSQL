@@ -1,2 +1,3 @@
 # NodeJS-OracleSQL
-NodeJS with Oracle SQL
+
+RESTful API with NodeJS and OracleSQL (node-oracledb)

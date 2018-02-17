@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, '../public')));
  * Configure Routes
  */
 app.use('/', index);
-app.use('/todo/', todo);
+app.use('/api/todo/', todo);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -34,5 +34,16 @@
     "node": ">=6.10.0",
     "npm": ">=3.10.8"
   },
-  "keywords": []
+  "keywords": [
+    "node",
+    "nodejs",
+    "oracle",
+    "oracledb",
+    "node-oracledb",
+    "sql",
+    "oracle sql",
+    "rest API",
+    "restful",
+    "restful API"
+  ]
 }

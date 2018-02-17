@@ -14,7 +14,7 @@ require('dotenv').config();
  * when use node-oracle, port run is not killed
  * this is useful for development
  */
-process.on('SIGINT',function(){
+process.on('SIGINT', () => {
   process.exit(0);
 });
 
