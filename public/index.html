@@ -49,8 +49,26 @@
         <li>
           Find One By Id
           <form class="sha-form">
-            <input type="number" id="id-todo" placeholder="Id" class="small">
-            <button type="button" id="btn-find-one-todo">Find</button>
+            <input type="number" id="find-todo-id" placeholder="Id" class="small">
+            <button type="button" id="find-todo-btn">Find</button>
+            <div id="find-todo-info">[Nothing found]</div>
+          </form>
+        </li>
+
+        <li>
+          Update One By Id
+          <form method="post" class="sha-form" id="update-todo-form">
+            <input type="number" name="id" placeholder="Id to update" class="full" id="update-todo-id">
+            <br>
+            <input type="text" name="title" placeholder="Title" class="full">
+            <br>
+            <input type="text" name="content" placeholder="Content" class="full">
+            <br>
+            <input type="date" name="date_start" class="full">
+            <br>
+            <input type="date" name="date_end" class="full">
+            <br>
+            <button type="submit">Update</button>
           </form>
         </li>
       </ul>

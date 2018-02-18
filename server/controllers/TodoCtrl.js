@@ -1,6 +1,7 @@
 import oracledb from 'oracledb';
 import fs from 'fs';
 import path from 'path';
+import _ from 'lodash';
 
 const createSequence = async (cb) => {
   const pool = oracledb.getPool();
@@ -80,10 +81,38 @@ const findOneById = async (id, cb) => {
   }
 };
 
+const updateOneById = async (id, todo, cb) => {
+  const pool = oracledb.getPool();
+  try {
+    const conn = await pool.getConnection();
+
+    const columns = [];
+    if (todo.title && todo.title != '')
+      columns.push(`title='${todo.title}'`);
+    if (todo.content && todo.content != '')
+      columns.push(`content='${todo.content}'`);
+    if (todo.date_start && todo.date_start != '')
+      columns.push(`date_start=to_date(${todo.date_start}, 'yyyy-mm-dd')`);
+    if (todo.date_end && todo.date_end != '')
+      columns.push(`date_end=to_date(${todo.date_end}, 'yyyy-mm-dd')`);
+
+    const sql = `update Todo set ${columns.join(',')} where id=${id}`;
+    console.log(sql);
+
+    const res = await conn.execute(sql);
+    console.log(res);
+    cb(null, res.rowsAffected);
+
+  } catch (err) {
+    cb(err);
+  }
+};
+
 export default {
   createSequence,
   createTable,
   insert,
   findAll,
-  findOneById
+  findOneById,
+  updateOneById
 };
