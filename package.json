@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server",
     "eslint": "eslint server.js server/**/*.js public/js/**/*.js --fix",
-    "make-db": "node ./scripts/db/make.js"
+    "test-db": "node ./scripts/db/test-connection.js",
+    "make-db": "node ./scripts/db/make-db.js"
   },
   "dependencies": {
     "async": "^2.6.0",
