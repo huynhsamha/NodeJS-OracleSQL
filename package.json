@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node server",
-    "eslint": "eslint server.js server/**/*.js public/js/**/*.js --fix"
+    "eslint": "eslint server.js server/**/*.js public/js/**/*.js --fix",
+    "make-db": "node ./scripts/db/make.js"
   },
   "dependencies": {
     "async": "^2.6.0",
