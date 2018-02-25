@@ -1,18 +1,25 @@
 ---------------------------------------------------------------
--- DROP ALL TABLES AND SEQUENCES
+-- DROP ALL TABLES, SEQUENCES
 
-BEGIN
+create or replace procedure DROP_ALL_TABLES_SEQUENCES
+is
+begin
+  -- Drop sequences
+  FOR i IN (SELECT useq.sequence_name FROM USER_SEQUENCES useq) LOOP
+    EXECUTE IMMEDIATE 'drop sequence ' || i.sequence_name || '';
+  END LOOP;
 
-FOR i IN (SELECT us.sequence_name FROM USER_SEQUENCES us) LOOP
-    EXECUTE IMMEDIATE 'drop sequence '|| i.sequence_name ||'';
-END LOOP;
+  --Drop tables
+  FOR i IN (SELECT utb.table_name FROM USER_TABLES utb) LOOP
+    EXECUTE IMMEDIATE 'drop table ' || i.table_name ||' CASCADE CONSTRAINTS ';
+  END LOOP;
+end;
+/
 
-FOR i IN (SELECT ut.table_name FROM USER_TABLES ut) LOOP
-    EXECUTE IMMEDIATE 'drop table '|| i.table_name ||' CASCADE CONSTRAINTS ';
-END LOOP;
-
-END;
-
+begin 
+  DROP_ALL_TABLES_SEQUENCES;
+end;
+/
 ---------------------------------------------------------------
 -- CREATE SEQUENCES
 
@@ -90,7 +97,7 @@ BEGIN
     SELECT JOBS_SEQ.NEXTVAL INTO :NEW.JOB_ID FROM DUAL;
   END IF;
 END;
-
+/
 ---------------------------------------------------------------
 -- CREATE TRIGGER EMPLOYEES
 
@@ -102,7 +109,7 @@ BEGIN
     SELECT EMPLOYEES_SEQ.NEXTVAL INTO :NEW.EMPLOYEE_ID FROM DUAL;
 	END IF;
 END;
-
+/
 ---------------------------------------------------------------
 -- CREATE TRIGGER DEPARTMENTS
 
@@ -114,7 +121,7 @@ BEGIN
     SELECT DEPARTMENTS_SEQ.NEXTVAL INTO :NEW.DEPARTMENT_ID FROM DUAL;
 	END IF;
 END;
-
+/
 ---------------------------------------------------------------
 -- ALTER TABLE EMPLOYEES
 
