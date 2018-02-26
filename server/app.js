@@ -10,9 +10,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import db from './config/db';
-import index from './routes/index';
-import todo from './routes/todo';
 
+import index from './routes/index';
+import employees from './routes/employees';
+import departments from './routes/departments';
+import jobs from './routes/jobs';
 
 /**
  * Configure Database Oracle
@@ -41,7 +43,11 @@ app.use(express.static(path.join(__dirname, '../public')));
  * Configure Routes
  */
 app.use('/', index);
-app.use('/api/todo/', todo);
+
+app.use('/api/employees/', employees);
+app.use('/api/departments/', departments);
+app.use('/api/jobs/', jobs);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
