@@ -1,0 +1,32 @@
+/* DATATABLES */
+.sha-datatables thead {
+	background-color: rgb(14, 99, 152);
+	color: white;
+}
+.sha-datatables thead th {
+	border-width: 3px;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:before {
+	content: '\21bf';
+	font-size: 20px;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+	content: '\21c2';
+	font-size: 20px;
+}
+
+.sha-datatables th {
+	padding: 10px;
+}
+.sha-datatables td {
+	padding: 4px 10px;
+}

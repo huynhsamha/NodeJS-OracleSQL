@@ -11,98 +11,40 @@ body {
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
-input {
-	border-radius: 8px;
-	padding: 6px 8px;
-	border: 1px solid #0812b3;
-	outline: none;
-	font-family: 'Nunito', sans-serif !important;
-	font-size: 0.8em !important;
-}
-
-button {
-	padding: 6px 20px;
-	background-color: #0812b3;
-	border-radius: 40px;
-	color: white;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	font-family: 'Nunito', sans-serif !important;
-	font-size: 0.9em !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	margin-top: 5px !important;
-	margin-bottom: 5px !important;
-}
-
-.sha-wrapper {
-	padding: 15px 20px;
-}
-
-.sha-col {
-	width: 25%;
-}
-
+/* COMMON */
 .sha-title {
-	text-align: center;
+	font-weight: 900;
+}
+
+/* HEADER */
+.sha-header {
+	background-color: rgb(0, 75, 79);
+	color: white;
+	height: 40px;
+	line-height: 40px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sha-header a {
+	color: white !important;
+}
+.sha-header a:hover {
+	color: #fcff55 !important;
+}
+.sha-header .fa {
+	margin-left: 5px;
+}
+
+
+/* BODY */
+.sha-body {
+	margin-top: 40px;
+	padding-top: 25px;
+}
+.sha-body .sha-title {
 	text-transform: uppercase;
-	font-size: 2em;
-}
-
-.sha-list > li {
-	margin: 8px 2px;
-}
-
-.sha-form {
-	margin-top: 15px;
-	text-align: center;
-	border: dashed #3a579b 1px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	width: 100%;
-}
-
-.sha-form > input {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.sha-form > input.full {
-	width: 80%;
-}
-
-.sha-form > input.small {
-	width: 50%;
-	margin-right: 5px;
-}
-
-.sha-form > button {
-	margin-top: 10px;
-}
-
-.sha-form > pre {
-	font-size: 0.7em;
-}
-
-@media screen and (max-width: 992px) {
-	.sha-col {
-		width: 33%
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.sha-col {
-		width: 50%;
-	}
-}
-
-@media screen and (max-width: 576px) {
-	.sha-col {
-		width: 100%;
-	}
+	font-size: 32px;
 }
