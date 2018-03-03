@@ -38,11 +38,23 @@ a {
 	margin-left: 5px;
 }
 
+/* FOOTER */
+.sha-footer {
+	background-color: rgb(11, 118, 123);
+	color: white;
+	text-align: center;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+}
+
 
 /* BODY */
 .sha-body {
 	margin-top: 40px;
 	padding-top: 25px;
+	margin-bottom: 32px;
+	padding-bottom: 30px;
 }
 .sha-body .sha-title {
 	text-transform: uppercase;
