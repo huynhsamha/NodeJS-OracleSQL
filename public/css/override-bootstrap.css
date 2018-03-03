@@ -1,0 +1,11 @@
+.modal-content{
+	border-top: 16px solid #0d7149;
+	border-bottom: 12px solid #0d7149;
+	border-radius: 10px;
+}
+.modal-header {
+	border-bottom: 1px solid #c7c7c7;
+}
+.modal-footer {
+	border-top: 1px solid #c7c7c7;
+}

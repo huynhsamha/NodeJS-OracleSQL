@@ -31,6 +31,19 @@ class Job {
     && this.min_salary > 0
     && this.max_salary > 0;
   }
+
+  getSqlStatement_Set() {
+    const columns = [];
+
+    if (this.job_title.length > 0)
+      columns.push(`job_title='${this.job_title}'`);
+    if (this.min_salary > 0)
+      columns.push(`min_salary=${this.min_salary}`);
+    if (this.max_salary > 0)
+      columns.push(`max_salary=${this.max_salary}`);
+
+    return columns.join(',');
+  }
 }
 
 export default Job;

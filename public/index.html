@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/lib/jquery-confirm/jquery-confirm.min.css">
   <!-- Override Styles -->
   <link rel="stylesheet" href="/css/override-datatables.css">
+  <link rel="stylesheet" href="/css/override-bootstrap.css">
   <!-- Styles -->
   <link rel="stylesheet" href="/css/style.css">
 
@@ -96,9 +97,49 @@
   </div>
 
 
+  <!-- Modal Edit Job -->
+  <!-- Modal -->
+  <div class="modal fade" id="modal-edit-job" tabindex="-1" role="dialog" aria-labelledby="modal-edit-job-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-edit-job-title">Edit Job</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <label for="edit-job-title">Job Title</label>
+                <input type="text" class="form-control" placeholder="Job Title" id="edit-job-title" />
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                <label for="edit-job-min-salary">Min Salary</label>
+                <input type="number" step="0.01" class="form-control" placeholder="Min Salary" id="edit-job-min-salary" />
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                <label for="edit-job-max-salary">Max Salary</label>
+                <input type="number" step="0.01" class="form-control" placeholder="Max Salary" id="edit-job-max-salary" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+          <button type="button" class="btn btn-primary" id="btn-edit-job">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <div class="sha-footer fixed-bottom">
-    Copyright <span><i class="fa fa-copyright"></i></span> 2017-2018
+    Copyright
+    <span>
+      <i class="fa fa-copyright"></i>
+    </span> 2017-2018
   </div>
 
   <!-- Jquery -->

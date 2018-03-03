@@ -45,10 +45,88 @@ $(() => {
   });
 
   // On edit job
+  let rowModalEditJob = null;
   $('#table-jobs tbody').on('click', 'button.btn-edit-job', function () {
-    var data = datatable_jobs.row($(this).parents('tr')).data();
+    /**
+     * DataTables.net - API get row
+     */
+    rowModalEditJob = datatable_jobs.row($(this).parents('tr'));
+    const data = rowModalEditJob.data();
     console.log(data);
+    $('#edit-job-title').val(data.JOB_TITLE);
+    $('#edit-job-min-salary').val(data.MIN_SALARY);
+    $('#edit-job-max-salary').val(data.MAX_SALARY);
+    $('#modal-edit-job').modal('show');
   });
+
+  $('#btn-edit-job').click(() => {
+    const data = rowModalEditJob.data();
+    const job = {
+      JOB_TITLE: $('#edit-job-title').val() || null,
+      MIN_SALARY: $('#edit-job-min-salary').val() || null,
+      MAX_SALARY: $('#edit-job-max-salary').val() || null
+    };
+    if (job.JOB_TITLE) data.JOB_TITLE = job.JOB_TITLE;
+    if (job.MIN_SALARY) data.MIN_SALARY = job.MIN_SALARY;
+    if (job.MAX_SALARY) data.MAX_SALARY = job.MAX_SALARY;
+    console.log(job);
+    console.log(data);
+
+    updateJob(data, rowModalEditJob);
+  });
+
+  function updateJob(data, row) {
+    $.confirm({
+      buttons: {
+        okSuccess: { text: 'OK', btnClass: 'btn-success' },
+        okError: { text: 'OK', btnClass: 'btn-danger' }
+      },
+      content() {
+        const self = this;
+        return $.ajax({
+          url: '/api/jobs',
+          type: 'put',
+          data
+        })
+          .statusCode({
+            400: () => {
+              self.setTitle('Warning');
+              self.setContent('Invalid id job to update');
+              self.setType('red');
+              self.buttons.okSuccess.hide();
+            },
+            200: () => {
+              self.setTitle('Notification');
+              self.setContent('Update job successfully!');
+              self.setType('green');
+              self.buttons.okError.hide();
+              /**
+               * DataTables.net - API update row
+               */
+              row.data(data).draw();
+              // Clear data modal
+              $('#edit-job-title').val('');
+              $('#edit-job-min-salary').val('');
+              $('#edit-job-max-salary').val('');
+              $('#modal-edit-job').modal('hide');
+              rowModalEditJob = null;
+            },
+            409: () => {
+              self.setTitle('Error');
+              self.setContent('Update job is conflict!');
+              self.setType('red');
+              self.buttons.okSuccess.hide();
+            },
+            500: () => {
+              self.setTitle('Error');
+              self.setContent('Error on server. Please try again!');
+              self.setType('red');
+              self.buttons.okSuccess.hide();
+            }
+          });
+      }
+    });
+  }
 
   // On remove job
   $('#table-jobs tbody').on('click', 'button.btn-remove-job', function () {
@@ -190,6 +268,11 @@ $(() => {
         MAX_SALARY: row.max_salary
       })
       .draw(false);
+
+    // Clear data insert job
+    $('#job-title').val('');
+    $('#job-min-salary').val('');
+    $('#job-max-salary').val('');
   }
 
 });

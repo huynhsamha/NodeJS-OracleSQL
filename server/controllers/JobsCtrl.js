@@ -1,6 +1,6 @@
 import oracledb from 'oracledb';
 import fs from 'fs';
-import path from 'path';
+import path, { join } from 'path';
 import _ from 'lodash';
 import Job from './../models/Job';
 
@@ -75,20 +75,23 @@ const findOneById = async (id, cb) => {
   }
 };
 
-const updateOneById = async (id, job, cb) => {
+const updateOneById = async (id, job = new Job(), cb) => {
   const pool = oracledb.getPool();
   try {
     const conn = await pool.getConnection();
 
-    const columns = [];
-    if (job.title && job.title != '')
-      columns.push(`title='${job.title}'`);
-
-    const sql = `UPDATE JOBS SET ${columns.join(',')} where job_id=${id}`;
+    const sqlStatementSet = job.getSqlStatement_Set();
+    const sql = `UPDATE JOBS SET ${sqlStatementSet} where job_id=${id}`;
+    console.log(sql);
 
     const res = await conn.execute(sql);
     console.log(res);
-    cb(null, res.rowsAffected);
+
+    if (res.rowsAffected == 1) {
+      cb(null, { updated: true });
+    } else {
+      cb(null, { updated: false });
+    }
 
   } catch (err) {
     cb(err);

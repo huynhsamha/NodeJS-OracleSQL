@@ -1,10 +1,10 @@
 import express from 'express';
+import lowercaseKeys from 'lowercase-keys';
 
 const router = express.Router();
 
 import Job from './../models/Job';
 import JobsCtrl from '../controllers/JobsCtrl';
-
 
 router.get('/', (req, res, next) => {
   JobsCtrl.findAll((err, data) => {
@@ -15,8 +15,8 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const data = req.body;
+  const job = new Job(lowercaseKeys(data));
   console.log(data);
-  const job = new Job(data);
   console.log(job);
   if (!job.isValid()) {
     return res.status(400).send({ message: 'Bad Request' });
@@ -49,23 +49,25 @@ router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   JobsCtrl.findOneById(id, (err, data) => {
     if (err) { console.log(err); return res.status(500).send(err); }
-    if (data) res.status(200).send(data);
+    if (data) res.status(200).send({ data });
     else res.status(404).send({ errorMessage: 'Job not found' });
   });
 });
 
-router.post('/:id', (req, res, next) => {
-  const id = req.params.id;
-  const job = req.body;
-  console.log(id);
+router.put('/', (req, res, next) => {
+  const data = req.body;
+  const job = new Job(lowercaseKeys(data));
+  console.log(data);
   console.log(job);
-  if (id != job.job_id) {
-    return res.send(new Error('Not match ID job'));
+  if (!job.job_id) {
+    return res.status(400).send({ message: 'Bad Request' });
   }
-  JobsCtrl.updateOneById(id, job, (err, rowsAffected) => {
+  JobsCtrl.updateOneById(job.job_id, job, (err, { updated = false }) => {
     if (err) { console.log(err); return res.status(500).send(err); }
-    if (rowsAffected == 0) res.status(404).send({ errorMessage: 'Job not found' });
-    else res.status(200).send({ message: 'Job is updated' });
+    if (updated) {
+      return res.status(200).send({ message: 'Job is updated' });
+    }
+    res.status(409).send({ message: 'Job updated is conflict' });
   });
 });
 
