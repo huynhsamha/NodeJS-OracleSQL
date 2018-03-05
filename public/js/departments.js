@@ -1,41 +1,41 @@
 $(() => {
 
-  const datatable_jobs = $('#table-jobs').DataTable({
-    ajax: '/api/jobs',
+  const datatable_departments = $('#table-departments').DataTable({
+    ajax: '/api/departments',
     columnDefs: [
       {
         targets: 0,
-        data: 'JOB_ID',
+        data: 'DEPARTMENT_ID',
         render(data, type, row, meta) {
           return `<div class="text-center">${data}</div>`;
         }
       },
       {
         targets: 1,
-        data: 'JOB_TITLE'
+        data: 'DEPARTMENT_NAME'
       },
       {
         targets: 2,
-        data: 'MIN_SALARY',
+        data: 'MANAGER_ID',
         render(data, type, row, meta) {
-          return `<div class="text-right">$${data}</div>`;
+          return `<div class="text-center">${data || 'null'}</div>`;
         }
       },
       {
         targets: 3,
-        data: 'MAX_SALARY',
+        data: 'MANAGER_ID',
         render(data, type, row, meta) {
-          return `<div class="text-right">$${data}</div>`;
+          return `<div class="text-center">${data || 'null'}</div>`;
         }
       },
       {
         targets: 4,
         defaultContent:
           `<div class="text-center sha-dt-icons">
-            <button class="btn btn-success btn-edit-job">
+            <button class="btn btn-success btn-edit-department">
               <span><i class="fa fa-edit"></i></span>
             </button>
-            <button class="btn btn-danger btn-remove-job">
+            <button class="btn btn-danger btn-remove-department">
               <span><i class="fa fa-trash"></i></span>
             </button>
           </div>`
@@ -44,38 +44,35 @@ $(() => {
     lengthMenu: [[10, 20, 25, 50, -1], [10, 20, 25, 50, 'All']]
   });
 
-  // On edit job
-  let rowModalEditJob = null;
-  $('#table-jobs tbody').on('click', 'button.btn-edit-job', function () {
+  // On edit department
+  let rowModalEditDepartment = null;
+  $('#table-departments tbody').on('click', 'button.btn-edit-department', function () {
     /**
      * DataTables.net - API get row
      */
-    rowModalEditJob = datatable_jobs.row($(this).parents('tr'));
-    const data = rowModalEditJob.data();
+    rowModalEditDepartment = datatable_departments.row($(this).parents('tr'));
+    const data = rowModalEditDepartment.data();
     console.log(data);
-    $('#edit-job-title').val(data.JOB_TITLE);
-    $('#edit-job-min-salary').val(data.MIN_SALARY);
-    $('#edit-job-max-salary').val(data.MAX_SALARY);
-    $('#modal-edit-job').modal('show');
+    $('#edit-department-name').val(data.DEPARTMENT_NAME);
+    $('#edit-department-manager-id').val(data.MANAGER_ID);
+    $('#modal-edit-department').modal('show');
   });
 
-  $('#btn-edit-job').click(() => {
-    const data = rowModalEditJob.data();
-    const job = {
-      JOB_TITLE: $('#edit-job-title').val() || null,
-      MIN_SALARY: $('#edit-job-min-salary').val() || null,
-      MAX_SALARY: $('#edit-job-max-salary').val() || null
+  $('#btn-edit-department').click(() => {
+    const data = rowModalEditDepartment.data();
+    const department = {
+      DEPARTMENT_NAME: $('#edit-department-name').val() || null,
+      MANAGER_ID: $('#edit-department-manager-id').val() || null
     };
-    if (job.JOB_TITLE) data.JOB_TITLE = job.JOB_TITLE;
-    if (job.MIN_SALARY) data.MIN_SALARY = job.MIN_SALARY;
-    if (job.MAX_SALARY) data.MAX_SALARY = job.MAX_SALARY;
-    console.log(job);
+    if (department.DEPARTMENT_NAME) data.DEPARTMENT_NAME = department.DEPARTMENT_NAME;
+    if (department.MANAGER_ID) data.MANAGER_ID = department.MANAGER_ID;
+    console.log(department);
     console.log(data);
 
-    updateJob(data, rowModalEditJob);
+    updateDepartment(data, rowModalEditDepartment);
   });
 
-  function updateJob(data, row) {
+  function updateDepartment(data, row) {
     $.confirm({
       buttons: {
         okSuccess: { text: 'OK', btnClass: 'btn-success' },
@@ -84,20 +81,20 @@ $(() => {
       content() {
         const self = this;
         return $.ajax({
-          url: '/api/jobs',
+          url: '/api/departments',
           type: 'put',
           data
         })
           .statusCode({
             400: () => {
               self.setTitle('Warning');
-              self.setContent('Invalid id job to update');
+              self.setContent('Invalid id department to update');
               self.setType('red');
               self.buttons.okSuccess.hide();
             },
             200: () => {
               self.setTitle('Notification');
-              self.setContent('Update job successfully!');
+              self.setContent('Update department successfully!');
               self.setType('green');
               self.buttons.okError.hide();
               /**
@@ -105,11 +102,10 @@ $(() => {
                */
               row.data(data).draw();
               // Clear data modal
-              $('#edit-job-title').val('');
-              $('#edit-job-min-salary').val('');
-              $('#edit-job-max-salary').val('');
-              $('#modal-edit-job').modal('hide');
-              rowModalEditJob = null;
+              $('#edit-department-name').val('');
+              $('#edit-department-manager-id').val('');
+              $('#modal-edit-department').modal('hide');
+              rowModalEditDepartment = null;
             },
             500: () => {
               self.setTitle('Error');
@@ -122,18 +118,18 @@ $(() => {
     });
   }
 
-  // On remove job
-  $('#table-jobs tbody').on('click', 'button.btn-remove-job', function () {
+  // On remove department
+  $('#table-departments tbody').on('click', 'button.btn-remove-department', function () {
     /**
      * DataTables.net - API get row
      */
-    const row = datatable_jobs.row($(this).parents('tr'));
+    const row = datatable_departments.row($(this).parents('tr'));
     const data = row.data();
     console.log(data);
     $.confirm({
       title: 'Warning',
-      content: `Do you want to remove the job ${data.JOB_ID}?<br>
-        Title: "${data.JOB_TITLE}"?`,
+      content: `Do you want to remove the department ${data.DEPARTMENT_ID}?<br>
+        Name: "${data.DEPARTMENT_NAME}"?`,
       type: 'red',
       columnClass: 'col-md-8',
       buttons: {
@@ -141,7 +137,7 @@ $(() => {
           text: 'OK',
           btnClass: 'btn-danger',
           action: () => {
-            removeJob(data.JOB_ID, row);
+            removeDepartment(data.DEPARTMENT_ID, row);
           }
         },
         cancle: {
@@ -152,7 +148,7 @@ $(() => {
     });
   });
 
-  function removeJob(id, row) {
+  function removeDepartment(id, row) {
     $.confirm({
       buttons: {
         okSuccess: { text: 'OK', btnClass: 'btn-success' },
@@ -161,19 +157,19 @@ $(() => {
       content() {
         const self = this;
         return $.ajax({
-          url: `/api/jobs/${id}`,
+          url: `/api/departments/${id}`,
           type: 'delete'
         })
           .statusCode({
             400: () => {
               self.setTitle('Warning');
-              self.setContent('Invalid id job to delete');
+              self.setContent('Invalid id department to delete');
               self.setType('red');
               self.buttons.okSuccess.hide();
             },
             200: () => {
               self.setTitle('Notification');
-              self.setContent('Remove job successfully!');
+              self.setContent('Remove department successfully!');
               self.setType('green');
               self.buttons.okError.hide();
               /**
@@ -192,14 +188,13 @@ $(() => {
     });
   }
 
-  // On insert job
-  $('#btn-insert-job').click(() => {
-    const job = {
-      job_title: $('#job-title').val(),
-      min_salary: $('#job-min-salary').val(),
-      max_salary: $('#job-max-salary').val()
+  // On insert department
+  $('#btn-insert-department').click(() => {
+    const department = {
+      department_name: $('#department-name').val(),
+      manager_id: $('#department-manager-id').val()
     };
-    console.log(job);
+    console.log(department);
     /**
      * TODO: can check valid data here...
      */
@@ -211,14 +206,14 @@ $(() => {
       content() {
         const self = this;
         return $.ajax({
-          url: '/api/jobs',
+          url: '/api/departments',
           type: 'post',
-          data: job
+          data: department
         })
           .statusCode({
             400: () => {
               self.setTitle('Error');
-              self.setContent('Invalid data to insert new job.');
+              self.setContent('Invalid data to insert new department.');
               self.setType('red');
               self.buttons.okSuccess.hide();
             },
@@ -228,7 +223,7 @@ $(() => {
               self.setType('green');
               self.buttons.okError.hide();
               console.log(data);
-              insertJobToTable(data.row);
+              insertDepartmentToTable(data.row);
             },
             500: () => {
               self.setTitle('Error');
@@ -241,26 +236,25 @@ $(() => {
     });
   });
 
-  function insertJobToTable(row) {
+  function insertDepartmentToTable(row) {
     /**
      * DataTables.net - API add new row(s)
      *
      * + row.add({}): add a new row
      * + rows.add([{},{}]): add multiple rows
      */
-    datatable_jobs.row
+    datatable_departments.row
       .add({
-        JOB_ID: row.job_id,
-        JOB_TITLE: row.job_title,
+        DEPARTMENT_ID: row.department_id,
+        DEPARTMENT_NAME: row.department_name,
         MIN_SALARY: row.min_salary,
         MAX_SALARY: row.max_salary
       })
       .draw(false);
 
-    // Clear data insert job
-    $('#job-title').val('');
-    $('#job-min-salary').val('');
-    $('#job-max-salary').val('');
+    // Clear data insert department
+    $('#department-name').val('');
+    $('#department-manager-id').val('');
   }
 
 });

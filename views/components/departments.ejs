@@ -1,0 +1,73 @@
+<% script('/js/departments.js') -%>
+
+<!-- Jobs Table -->
+<div class="row">
+    <div class="col-lg-12 col-sm-12 text-center sha-title">
+        Departments
+    </div>
+
+    <div class="col-lg-12 col-sm-12" style="margin-top: 20px">
+        <h4 style="margin-bottom: 20px">Insert new Department</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                    <input type="text" class="form-control" placeholder="Department Name" id="department-name" />
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 form-group">
+                    <input type="number" class="form-control" placeholder="Manager ID" id="department-manager-id" />
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-12 form-group">
+                    <button class="btn btn-success btn-block" type="button" id="btn-insert-department">Insert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12" style="margin-top: 20px">
+        <h4 style="margin-bottom: 20px">Departments in data</h4>
+        <table id="table-departments" class="table table-sm table-bordered sha-datatables" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th width="8%">ID</th>
+                    <th width="50%">Name</th>
+                    <th width="15%">Manager ID</th>
+                    <th width="15%">Manager Name</th>
+                    <th width="12%">Edit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal Edit Job -->
+<div class="modal fade" id="modal-edit-department" tabindex="-1" role="dialog" aria-labelledby="modal-edit-job-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-edit-department-title">Edit Department</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label for="edit-job-title">Department Name</label>
+                            <input type="text" class="form-control" placeholder="Department name" id="edit-department-name" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label for="edit-job-min-salary">Manager ID</label>
+                            <input type="number" class="form-control" placeholder="Manager id" id="edit-department-manager-id" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-primary" id="btn-edit-department">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

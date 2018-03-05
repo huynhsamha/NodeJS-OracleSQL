@@ -18,30 +18,30 @@ router.post('/', (req, res, next) => {
   const job = new Job(lowercaseKeys(data));
   console.log(data);
   console.log(job);
-  if (!job.isValid()) {
-    return res.status(400).send({ message: 'Bad Request' });
+  if (!job.canInsert()) {
+    return res.status(400).send({ message: 'Bad Request: Job created is not valid to insert' });
   }
-  JobsCtrl.insert(job, (err, { created = false, row }) => {
+  JobsCtrl.insert(job, (err, ans = { created: false, row: {} }) => {
     if (err) { console.log(err); return res.status(500).send(err); }
-    if (created) {
-      return res.status(201).send({ message: 'Job is created', row });
+    if (ans.created) {
+      return res.status(201).send({ message: 'Job is created', row: ans.row });
     }
-    res.status(409).send({ message: 'Job created is conflit' });
+    res.status(400).send({ message: 'Bad Request: Job created is conflit to insert' });
   });
 });
 
 router.delete('/:id', (req, res, next) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id, 10) || null;
   console.log(id);
-  if (!id || typeof id != 'number') {
-    return res.status(400).send({ message: 'Bad Request' });
+  if (!id) {
+    return res.status(400).send({ message: 'Bad Request: Id is not valid to delete' });
   }
-  JobsCtrl.deleteOneById(id, (err, { deleted = false }) => {
+  JobsCtrl.deleteOneById(id, (err, ans = { deleted: false }) => {
     if (err) { console.log(err); return res.status(500).send(err); }
-    if (deleted) {
+    if (ans.deleted) {
       return res.status(200).send({ message: 'Job is deleted' });
     }
-    res.status(409).send({ message: 'Job deleted is conflit' });
+    res.status(400).send({ message: 'Bad Request: Job deleted is conflit to delete' });
   });
 });
 
@@ -59,15 +59,15 @@ router.put('/', (req, res, next) => {
   const job = new Job(lowercaseKeys(data));
   console.log(data);
   console.log(job);
-  if (!job.job_id) {
-    return res.status(400).send({ message: 'Bad Request' });
+  if (!job.canUpdate()) {
+    return res.status(400).send({ message: 'Bad Request: Job is not valid to update' });
   }
-  JobsCtrl.updateOneById(job.job_id, job, (err, { updated = false }) => {
+  JobsCtrl.updateOneById(job.job_id, job, (err, ans = { updated: false }) => {
     if (err) { console.log(err); return res.status(500).send(err); }
-    if (updated) {
+    if (ans.updated) {
       return res.status(200).send({ message: 'Job is updated' });
     }
-    res.status(409).send({ message: 'Job updated is conflict' });
+    res.status(400).send({ message: 'Bad Request: Job updated is not found or conflict to update' });
   });
 });
 

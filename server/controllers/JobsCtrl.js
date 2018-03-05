@@ -80,8 +80,8 @@ const updateOneById = async (id, job = new Job(), cb) => {
   try {
     const conn = await pool.getConnection();
 
-    const sqlStatementSet = job.getSqlStatement_Set();
-    const sql = `UPDATE JOBS SET ${sqlStatementSet} where job_id=${id}`;
+    const sql_update = job.getSQL_update();
+    const sql = `UPDATE JOBS SET ${sql_update} where job_id=${id}`;
     console.log(sql);
 
     const res = await conn.execute(sql);
@@ -106,6 +106,7 @@ const deleteOneById = async (id, cb) => {
 
     const res = await conn.execute(sql);
     console.log(res);
+
     if (res.rowsAffected == 1) {
       cb(null, { deleted: true });
     } else {
