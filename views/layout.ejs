@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>NodeJS - Oracle SQL</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,900" rel="stylesheet">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/lib/DataTables/datatables.min.css">
+    <!-- Jquery Confirm -->
+    <link rel="stylesheet" href="/lib/jquery-confirm/jquery-confirm.min.css">
+    
+    <!-- Override Styles -->
+    <link rel="stylesheet" href="/css/override-datatables.css">
+    <link rel="stylesheet" href="/css/override-bootstrap.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Other styles -->
+    <%-stylesheets%>
+</head>
+
+<body>
+
+    <header>
+        <% include components/header %>
+    </header>
+
+    <section>
+        <%-body -%>
+    </section>
+    
+    <footer>
+        <% include components/footer %>
+    </footer>
+
+    <!-- Jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="/lib/DataTables/datatables.min.js"></script>
+    <!-- Jquery Confirm -->
+    <script src="/lib/jquery-confirm/jquery-confirm.min.js"></script>
+    
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    
+    <!-- Other scripts -->
+    <%-scripts%>
+
+</body>
+
+</html>

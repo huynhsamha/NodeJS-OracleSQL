@@ -1,0 +1,80 @@
+<% script('/js/jobs.js') -%>
+
+<!-- Jobs Table -->
+<div class="row">
+    <div class="col-lg-12 col-sm-12 text-center sha-title">
+        Jobs
+    </div>
+
+    <div class="col-lg-12 col-sm-12" style="margin-top: 20px">
+        <h4 style="margin-bottom: 20px">Insert new Job</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12 form-group">
+                    <input type="text" class="form-control" placeholder="Job Title" id="job-title" />
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 form-group">
+                    <input type="number" step="0.01" class="form-control" placeholder="Min Salary" id="job-min-salary" />
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 form-group">
+                    <input type="number" step="0.01" class="form-control" placeholder="Max Salary" id="job-max-salary" />
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-12 form-group">
+                    <button class="btn btn-success btn-block" type="button" id="btn-insert-job">Insert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12" style="margin-top: 20px">
+        <h4 style="margin-bottom: 20px">Jobs in data</h4>
+        <table id="table-jobs" class="table table-sm table-bordered sha-datatables" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th width="8%">ID</th>
+                    <th width="50%">Title</th>
+                    <th width="15%">Min Salary</th>
+                    <th width="15%">Max Salary</th>
+                    <th width="12%">Edit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal Edit Job -->
+<div class="modal fade" id="modal-edit-job" tabindex="-1" role="dialog" aria-labelledby="modal-edit-job-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-edit-job-title">Edit Job</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <label for="edit-job-title">Job Title</label>
+                            <input type="text" class="form-control" placeholder="Job Title" id="edit-job-title" />
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label for="edit-job-min-salary">Min Salary</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="Min Salary" id="edit-job-min-salary" />
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <label for="edit-job-max-salary">Max Salary</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="Max Salary" id="edit-job-max-salary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-primary" id="btn-edit-job">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

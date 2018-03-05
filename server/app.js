@@ -8,6 +8,8 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import ejs from 'ejs';
+import engine from 'ejs-locals';
 
 import db from './config/db';
 
@@ -30,6 +32,11 @@ db.CreatePool()
  * Configure App Express
  */
 const app = express();
+
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
+app.set('views', path.join(__dirname, './../views'));
+app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(logger('dev'));
