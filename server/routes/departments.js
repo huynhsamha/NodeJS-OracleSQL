@@ -1,5 +1,5 @@
 import express from 'express';
-import lowercaseKeys from 'lowercase-keys';
+import lowerKeys from 'lowercase-keys-object';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const data = req.body;
-  const department = new Department(lowercaseKeys(data));
+  const department = new Department(lowerKeys(data));
   console.log(data);
   console.log(department);
   if (!department.canInsert()) {
@@ -56,7 +56,7 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const data = req.body;
-  const department = new Department(lowercaseKeys(data));
+  const department = new Department(lowerKeys(data));
   console.log(data);
   console.log(department);
   if (!department.canUpdate()) {
