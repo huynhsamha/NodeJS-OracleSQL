@@ -2,6 +2,12 @@
   "name": "nodejs-oraclesql",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://github.com/huynhsamha/node-oracle-sql",
+  "description": "NodeJS with Oracle SQL",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huynhsamha/node-oracle-sql.git"
+  },
   "scripts": {
     "start": "node server",
     "eslint": "eslint server.js server/**/*.js public/js/**/*.js --fix",
@@ -37,6 +43,18 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1"
   },
+  "author": {
+    "name": "huynhsamha",
+    "email": "huynhsamha@gmail.com",
+    "url": "https://github.com/huynhsamha"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huynhsamha/node-oracle-sql/issues"
+  },
+  "contributors": [
+    "huynhsamha"
+  ],
   "engines": {
     "node": ">=6.10.0",
     "npm": ">=3.10.8"
